@@ -1,8 +1,9 @@
 import type { Lang } from './state';
 
 const en = {
-  appTitle: 'ChGK Host',
+  appTitle: 'Quizit · Host',
   showName: 'What? Where? When?',
+  tagline: 'The battle of knowledge and logic',
   setup: 'Setup',
   done: 'Done',
   newGame: 'New game',
@@ -79,8 +80,9 @@ const en = {
 export type Dict = typeof en;
 
 const ru: Dict = {
-  appTitle: 'ЧГК · Ведущий',
+  appTitle: 'Quizit · Ведущий',
   showName: 'Что? Где? Когда?',
+  tagline: 'Битва знаний и логики',
   setup: 'Настройки',
   done: 'Готово',
   newGame: 'Новая игра',
@@ -155,8 +157,9 @@ const ru: Dict = {
 };
 
 const hy: Dict = {
-  appTitle: 'ԻՈԵ · Վարող',
+  appTitle: 'Quizit · Վարող',
   showName: 'Ի՞նչ, Որտե՞ղ, Ե՞րբ',
+  tagline: 'Գիտելիքի ու տրամաբանության ճակատամարտ',
   setup: 'Կարգավորումներ',
   done: 'Պատրաստ է',
   newGame: 'Նոր խաղ',
@@ -231,6 +234,6 @@ const hy: Dict = {
 };
 
 export const dicts: Record<Lang, Dict> = { ru, en, hy };
-export const langNames: Record<Lang, string> = { ru: 'Русский', en: 'English', hy: 'Հայերեն' };
+export const langNames: Record<Lang, string> = { hy: 'Հայերեն', ru: 'Русский', en: 'English' };
 
 export const fmt = (s: string, vars: Record<string, string>) => s.replace(/\{(\w+)\}/g, (_, k) => vars[k] ?? '');

@@ -3,6 +3,7 @@ import { dicts } from '../i18n';
 import { computeRows, questionList } from '../scoring';
 import { useAppState } from '../state';
 import { timeLeft } from '../timer';
+import { Logo } from './Logo';
 import { useNow } from './TimerPanel';
 
 function toggleFullscreen() {
@@ -38,13 +39,17 @@ export function Board() {
 
       {game.board.mode === 'hidden' ? (
         <div class="board-splash">
-          <div class="owl big">🦉</div>
+          <Logo />
           <h1>{title}</h1>
+          <div class="tagline">{t.tagline}</div>
         </div>
       ) : (
         <>
           <header class="board-head">
-            <h1>{title}</h1>
+            <div class="board-title">
+              <Logo />
+              <h1>{title}</h1>
+            </div>
             <div class="board-status">
               {cq && game.board.mode === 'live' && (
                 <span class="board-q">

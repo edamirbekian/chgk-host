@@ -74,14 +74,9 @@ export const newGame = (): Game => ({
 
 export const idleTimer = (): Timer => ({ phase: 'idle', endsAt: null, pausedLeft: null, warned: false });
 
-function detectLang(): Lang {
-  const l = navigator.language.slice(0, 2);
-  return l === 'ru' || l === 'hy' ? l : 'en';
-}
-
 const defaults = (): AppState => ({
   settings: {
-    lang: detectLang(),
+    lang: 'hy',
     discussionSec: 60,
     answerSec: 20,
     signals: true,

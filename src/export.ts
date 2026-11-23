@@ -1,4 +1,5 @@
 import type { Dict } from './i18n';
+import { drawLogo } from './logo';
 import { computeRows, questionList } from './scoring';
 import type { Game } from './state';
 
@@ -48,7 +49,7 @@ export function exportCsv(game: Game, t: Dict) {
 export function exportPng(game: Game, t: Dict, lang: string) {
   const rows = computeRows(game);
   const font = (weight: number, px: number) =>
-    `${weight} ${px}px system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans Armenian", Sylfaen, sans-serif`;
+    `${weight} ${px}px Manrope, "Noto Sans Armenian", system-ui, -apple-system, "Segoe UI", Roboto, Sylfaen, sans-serif`;
   const scale = 2;
   const pad = 48;
   const titleH = 120;
@@ -71,14 +72,17 @@ export function exportPng(game: Game, t: Dict, lang: string) {
   const ctx = canvas.getContext('2d')!;
   ctx.scale(scale, scale);
 
-  ctx.fillStyle = '#0b1220';
+  ctx.fillStyle = '#1c0b10';
   ctx.fillRect(0, 0, width, height);
+  ctx.fillStyle = '#c23031';
+  ctx.fillRect(0, 0, width, 6);
+  drawLogo(ctx, width - pad - 72, 28, 72);
 
-  ctx.fillStyle = '#e8b64c';
+  ctx.fillStyle = '#fff3e3';
   ctx.font = font(800, 40);
   ctx.textBaseline = 'alphabetic';
   ctx.fillText(game.title || t.showName, pad, 70);
-  ctx.fillStyle = '#8b98b5';
+  ctx.fillStyle = '#c7a49c';
   ctx.font = font(500, 18);
   ctx.fillText(new Date().toLocaleDateString(lang, { dateStyle: 'long' }), pad, 100);
 
@@ -105,8 +109,8 @@ export function exportPng(game: Game, t: Dict, lang: string) {
   };
 
   ctx.textBaseline = 'middle';
-  ctx.fillStyle = '#8b98b5';
-  ctx.font = font(600, 16);
+  ctx.fillStyle = '#c7a49c';
+  ctx.font = font(700, 16);
   drawCells(
     cols.map((c) => c.label.toUpperCase()),
     titleH + headH / 2,
@@ -115,7 +119,7 @@ export function exportPng(game: Game, t: Dict, lang: string) {
   rows.forEach((r, i) => {
     const y = titleH + headH + i * rowH;
     if (i % 2 === 0) {
-      ctx.fillStyle = 'rgba(255,255,255,0.04)';
+      ctx.fillStyle = 'rgba(255,243,227,0.05)';
       ctx.fillRect(pad, y, width - pad * 2, rowH);
     }
     const podium = parseInt(r.place, 10) <= 3;
@@ -124,7 +128,7 @@ export function exportPng(game: Game, t: Dict, lang: string) {
     drawCells(
       [r.place, r.name, ...r.tours.map(String), String(r.total), ...(ratW ? [String(r.rating)] : [])],
       y + rowH / 2,
-      (col) => ((podium && col < 2) || col === totalCol ? '#e8b64c' : col > totalCol ? '#8b98b5' : '#e8edf7'),
+      (col) => ((podium && col < 2) || col === totalCol ? '#ffc354' : col > totalCol ? '#c7a49c' : '#fff3e3'),
     );
   });
 

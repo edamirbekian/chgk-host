@@ -5,6 +5,7 @@ import { questionList } from '../scoring';
 import { idleTimer, newGame, update, useAppState, type Lang } from '../state';
 import { tickTimer, toggleTimer } from '../timer';
 import { BoardControls } from './BoardControls';
+import { Logo } from './Logo';
 import { ScoreGrid } from './ScoreGrid';
 import { Setup } from './Setup';
 import { Soundboard } from './Soundboard';
@@ -72,8 +73,11 @@ export function Host() {
     <div class="host">
       <header class="topbar">
         <div class="brand">
-          <span class="owl">🦉</span>
-          <span>{game.title || t.appTitle}</span>
+          <Logo size={38} />
+          <div class="brand-text">
+            <span class="wordmark">quizit</span>
+            <span class="brand-sub">{game.title || t.showName}</span>
+          </div>
         </div>
 
         {cq && (
